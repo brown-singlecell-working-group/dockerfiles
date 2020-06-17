@@ -25,9 +25,14 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+# Download notebook
+RUN cd /home/$NB_USER \
+    && wget https://raw.githubusercontent.com/brown-singlecell-working-group/singlecell-rnaseq/master/report_cell.ipynb
+
 # Clean up and fix permissions
 RUN rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
     rm -rf /home/$NB_USER/.node-gyp && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
+
